@@ -28,7 +28,7 @@ const UserLinks = () => {
                     <Avatar src={avatar} size="sm" alt="avatar"></Avatar>
                 </Tooltip>
                 <p className="ml-4 font-roboto text-sm text-black font-medium no-underline">
-                    User 
+                    Username
                 </p>
             </div>
         </div>
