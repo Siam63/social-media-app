@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useContext } from 'react'
 import {
     Card,
     CardHeader,
@@ -12,8 +12,12 @@ import {
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from "yup";
+import ClipLoader from 'react-spinners/ClipLoader';
+import { AuthContext } from '../AppContext/AppContext';
 
 const Login = () => {
+    const { signInWithGoogle } = useContext(AuthContext);
+    const [loading, setLoading] = useState(false);
 
     let initialValues = {
         email: "",
@@ -34,6 +38,7 @@ const Login = () => {
 
         if(formik.isValid === true){
             alert("Good!");
+            setLoading(true);
         }else{
             alert("Check your input fields!");
         }
@@ -43,7 +48,13 @@ const Login = () => {
     const formik = useFormik({ initialValues, validationSchema, handleSubmit })
     
     return (
-        <div className="grid grid-cols-1 h-screen justify-items-center items-center">
+        <>
+        {loading ? <div className="grid grid-cols-1 justify-items-center items-center h-screen">
+            <ClipLoader
+                color="#4976da"
+                size={65}
+                speedMultiplier={0.5}
+            /> </div> : <div className="grid grid-cols-1 h-screen justify-items-center items-center">
             <Card className="w-96">
                 <CardHeader
                     variant="gradient"
@@ -80,7 +91,7 @@ const Login = () => {
                 </CardBody>
 
                 <CardFooter className="pt-0">
-                    <Button variant="gradient" fullWidth className="mb-4">
+                    <Button variant="gradient" fullWidth className="mb-4" onClick={signInWithGoogle}>
                         Sign In with Google
                     </Button>
                     <Link to="/reset">
@@ -95,7 +106,9 @@ const Login = () => {
                     </div>
                 </CardFooter>
             </Card>
-        </div>
+        </div>}
+            
+        </>
     );
 }
 
