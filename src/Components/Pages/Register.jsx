@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {
     Card,
     CardHeader,
@@ -8,13 +8,29 @@ import {
     Input,
     Button,
   } from "@material-tailwind/react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from "yup";
 import ClipLoader from 'react-spinners/ClipLoader';
+import { AuthContext } from '../AppContext/AppContext';
+import { auth, onAuthStateChanged } from '../firebase/firebase';
 
 const Register = () => {
     const [loading, setLoading] = useState(false);
+    const { registerWithEmailAndPassword } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        setLoading(true);
+        onAuthStateChanged(auth, (user) => {
+            if(user){
+                navigate("/");
+                setLoading(false);
+            }else{
+                setLoading(false);
+            }
+        })
+    }, [navigate]);
 
     let initialValues = {
         name: "",
@@ -40,9 +56,10 @@ const Register = () => {
         e.preventDefault();
         const {name, email, password} = formik.values;
         if(formik.isValid === true){
-            alert("Good!");
+            registerWithEmailAndPassword(name, email, password);
             setLoading(true);
         }else{
+            setLoading(false);
             alert("Check your input fields!");
         }
     }

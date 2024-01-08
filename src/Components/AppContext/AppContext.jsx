@@ -2,7 +2,7 @@ import React, { useState, useEffect, createContext } from 'react'
 import { signOut, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
 import { auth, db, onAuthStateChanged } from '../firebase/firebase';
 import { addDoc, collection, getDocs, onSnapshot, query, where } from 'firebase/firestore';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export const AuthContext = createContext();
 
@@ -12,7 +12,7 @@ const AppContext = ({ children }) => {
     const [user, setUser] = useState();
     const [userData, setUserData] = useState();
 
-    const navigate = useNavigate
+    const navigate = useNavigate();
 
     const signInWithGoogle = async () => {
         try{
@@ -36,7 +36,7 @@ const AppContext = ({ children }) => {
         }
     };
 
-    const loginWithUserAndEmail = async (email, password) => {
+    const loginWithEmailAndPassword = async (email, password) => {
         try{
             await signInWithEmailAndPassword(auth, email, password);
         }catch(err){
@@ -73,18 +73,8 @@ const AppContext = ({ children }) => {
         await signOut(auth);
     }
 
-    const initialState = {
-        signInWithGoogle: signInWithGoogle,
-        loginWithUserAndEmail: loginWithUserAndEmail,
-        registerWithEmailAndPassword: registerWithEmailAndPassword,
-        sendPasswordToUser: sendPasswordToUser,
-        signOutUser: signOutUser,
-        user: user,
-        userData: userData,
-    };
-
     const userStateChanged = async () => {
-        onAuthStateChanged(auth, async() => {
+        onAuthStateChanged(auth, async(user) => {
             if(user){
                 const q = query(collectionUsersRef, where("uid", "==", user?.uid));
                 await onSnapshot(q, (doc) => {
@@ -93,7 +83,7 @@ const AppContext = ({ children }) => {
                 setUser(user);
             }else{
                 setUser(null);
-                Navigate("/login");
+                navigate("/login");
             }
         });
     };
@@ -109,7 +99,16 @@ const AppContext = ({ children }) => {
         return () => userStateChanged();
     }, []);
 
-    console.log("user", user);
+    const initialState = {
+        signInWithGoogle: signInWithGoogle,
+        loginWithEmailAndPassword: loginWithEmailAndPassword,
+        registerWithEmailAndPassword: registerWithEmailAndPassword,
+        sendPasswordToUser: sendPasswordToUser,
+        signOutUser: signOutUser,
+        user: user,
+        userData: userData,
+    };
+
     console.log("userData", userData);
 
     return (
