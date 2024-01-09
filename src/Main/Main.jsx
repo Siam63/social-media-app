@@ -1,12 +1,12 @@
 import React, { useRef, useContext, useState, useReducer, useEffect } from 'react'
-import { Avatar, Button } from "@material-tailwind/react";
-import avatar from '../Assets/avatar.jpg';
+import { Avatar, Button, Alert } from "@material-tailwind/react";
+import avatar from '../Assets/images/avatar.jpg';
 import live from '../Assets/images/live.png';
 import smile from '../Assets/images/smile.png';
 import addImage from '../Assets/images/add-image.png';
 import { AuthContext } from '../Components/AppContext/AppContext';
 import { doc, setDoc, collection, serverTimestamp, query, orderBy, onSnapshot } from 'firebase/firestore';
-import {db} from "../Components/firebase/firebase";
+import { db } from "../Components/firebase/firebase";
 import { PostsReducer, postActions, postStates } from '../Components/AppContext/postReducer';
 import {
     getStorage,
@@ -14,6 +14,7 @@ import {
     uploadBytesResumable,
     getDownloadURL,
 } from 'firebase/storage';
+import PostCard from './PostCard';
 
 const Main = () => {
     const {user, userData } = useContext(AuthContext);
@@ -121,7 +122,7 @@ const Main = () => {
         <div className="flex flex-col items-center">
             <div className="flex flex-col py-4 w-full bg-white rounded-3xl shadow-lg">
                 <div className="flex items-center border-b-2 border-gray-300 pb-4 pl-4 w-full">
-                    <Avatar className="h-8" size="sm" variant="circular" src={avatar} alt="avatar"></Avatar>
+                    <Avatar className="h-8" size="sm" variant="circular" src={user?.photoURL || avatar} alt="avatar"></Avatar>
                     <form className="w-full" onSubmit={handleSubmitPost}>
                         <div className="flex justify-between items-center">
                             <div className="w-full ml-4">
@@ -162,7 +163,17 @@ const Main = () => {
             </div>
 
             <div className="flex flex-col py-4 w-full">
-                {/* Posts */}
+                {state.error ? <div className="flex justify-center items-center">
+                    <Alert color="red">Something went wrong, please refresh the page and try again.</Alert>
+                </div> : (
+                    <div>
+                        {state.posts.length > 0 && state?.posts?.map((post, index) => {
+                            return <PostCard key={index} logo={post.logo} id={post.documentId} uid={post?.uid} name={post.name} image={post.image} email={post.email} text={post.text} 
+                            timestamp={new Date(post?.timestamp?.toDate()).toUTCString()}
+                            ></PostCard>
+                        })}
+                    </div>
+                )}
             </div>
 
             <div ref={scrollRef}>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import nature from '../../Assets/nature.jpeg';
+import nature from '../../Assets/images/nature.jpeg';
 
 const RightSide = () => {
     const [input, setInput] = useState("");

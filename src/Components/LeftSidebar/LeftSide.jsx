@@ -1,6 +1,6 @@
-import React, {useRef, useState, useEffect, useContext } from 'react'
-import nature from '../../Assets/nature.jpeg';
-import avatar from '../../Assets/avatar.jpg';
+import React, {useContext } from 'react'
+import nature from '../../Assets/images/nature.jpg';
+import avatar from '../../Assets/images/avatar.jpg';
 
 import { Tooltip, Avatar } from "@material-tailwind/react";
 import Facebook from '../../Assets/images/facebook.png';
@@ -18,7 +18,7 @@ const LeftSide = () => {
                 <img className="h-28 w-full rounded-r-xl" src={nature} alt="nature"/>
                 <div className="absolute -bottom-4 h-10 w-10">
                     <Tooltip content="Profile" placement="top">
-                        <Avatar size="md" src={avatar} alt="avatar"></Avatar>
+                        <Avatar size="md" src={user?.photoURL || avatar} alt="avatar"></Avatar>
                     </Tooltip>
                 </div>
             </div>

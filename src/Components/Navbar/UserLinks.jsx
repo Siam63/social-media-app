@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Tooltip, Avatar } from "@material-tailwind/react";
-import avatar from '../../Assets/avatar.jpg';
+import avatar from '../../Assets/images/avatar.jpg';
 import { AuthContext } from '../AppContext/AppContext';
 
 
@@ -28,7 +28,7 @@ const UserLinks = () => {
             </div>
             <div className="h-10 w-10 flex mx-4 items-center" onClick={signOutUser}>
                 <Tooltip content="Sign Out" placement="bottom">
-                    <Avatar src={avatar} size="sm" alt="avatar"></Avatar>
+                    <Avatar src={user?.photoURL || avatar} size="sm" alt="avatar"></Avatar>
                 </Tooltip>
                 <p className="ml-4 font-roboto text-sm text-black font-medium no-underline">
                     {user?.displayName === null && userData?.name !== undefined ? userData?.name?.charAt(0).toUpperCase() + userData?.name?.slice(1) : user?.displayName?.split(" ")[0]}
