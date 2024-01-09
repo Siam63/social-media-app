@@ -109,7 +109,6 @@ const AppContext = ({ children }) => {
         userData: userData,
     };
 
-    console.log("userData", userData);
 
     return (
         <div>
