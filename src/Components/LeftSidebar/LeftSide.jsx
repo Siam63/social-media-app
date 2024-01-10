@@ -8,12 +8,14 @@ import Twitter from '../../Assets/images/twitter.png';
 import Job from '../../Assets/images/job.png';
 import Location from '../../Assets/images/location.png';
 import { AuthContext } from '../AppContext/AppContext';
+import { useDarkMode } from '../../contexts/DarkModeContext';
 
 const LeftSide = () => {
     const { user, userData } = useContext(AuthContext);
+    const { darkMode, toggleDarkMode } = useDarkMode();
     
     return (
-        <div className="flex flex-col h-screen bg-white pb-4 border-2 rounded-r-xl shadow-lg">
+        <div className={darkMode ? 'dark flex flex-col h-screen pb-4 rounded-r-xl shadow-lg' : 'flex flex-col h-screen light pb-4 rounded-r-xl shadow-lg'}>
             <div className="flex flex-col items-center relative">
                 <img className="h-28 w-full rounded-r-xl" src={nature} alt="nature"/>
                 <div className="absolute -bottom-4 h-10 w-10">
@@ -23,13 +25,13 @@ const LeftSide = () => {
                 </div>
             </div>
             <div className="flex flex-col items-center pt-6">
-                <p className="font-roboto font-medium text-md text-gray-700 no-underline tracking-normal leading-none">
+                <p className={darkMode ? "font-roboto font-medium text-md text-white no-underline tracking-normal leading-none py-2" : "py-2 font-roboto font-medium text-md text-gray-500 no-underline tracking-normal leading-none"}>
                     { user?.email || userData?.email }
                 </p>
-                <p className="font-roboto font-medium text-xs text-gray-700 no-underline tracking-normal leading-none">
+                <p className={darkMode ? "font-roboto font-medium text-md text-white no-underline tracking-normal leading-none py-2" : "py-2 font-roboto font-medium text-md text-gray-500 no-underline tracking-normal leading-none"}>
                     Exclusive tools & insights
                 </p>
-                <p className="font-roboto font-medium text-sm text-gray-700 no-underline tracking-normal leading-none py-2">
+                <p className={darkMode ? "font-roboto font-medium text-md text-white no-underline tracking-normal leading-none py-2" : "py-2 font-roboto font-medium text-md text-gray-500 no-underline tracking-normal leading-none"}>
                     Try premium for free
                 </p>
             </div>

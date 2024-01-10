@@ -8,12 +8,14 @@ import { AuthContext } from '../Components/AppContext/AppContext';
 import { doc, setDoc, collection, serverTimestamp, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { db } from "../Components/firebase/firebase";
 import { PostsReducer, postActions, postStates } from '../Components/AppContext/postReducer';
+
 import {
     getStorage,
     ref,
     uploadBytesResumable,
     getDownloadURL,
 } from 'firebase/storage';
+
 import PostCard from './PostCard';
 
 const Main = () => {

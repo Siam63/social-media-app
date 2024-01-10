@@ -2,10 +2,11 @@ import React, { useContext } from 'react';
 import { Tooltip, Avatar } from "@material-tailwind/react";
 import avatar from '../../Assets/images/avatar.jpg';
 import { AuthContext } from '../AppContext/AppContext';
-
+import { useDarkMode } from '../../contexts/DarkModeContext';
 
 const UserLinks = () => {
     const { signOutUser, user, userData } = useContext(AuthContext);
+    const { darkMode, toggleDarkMode } = useDarkMode();
 
     return (
         <div className="flex justify-center items-center cursor-pointer">
@@ -30,7 +31,7 @@ const UserLinks = () => {
                 <Tooltip content="Sign Out" placement="bottom">
                     <Avatar src={user?.photoURL || avatar} size="sm" alt="avatar"></Avatar>
                 </Tooltip>
-                <p className="ml-4 font-roboto text-sm text-black font-medium no-underline">
+                <p className={darkMode ? "ml-4 font-roboto text-sm text-white font-medium no-underline" : "ml-4 font-roboto text-sm text-black font-medium no-underline"}>
                     {user?.displayName === null && userData?.name !== undefined ? userData?.name?.charAt(0).toUpperCase() + userData?.name?.slice(1) : user?.displayName?.split(" ")[0]}
                 </p>
             </div>

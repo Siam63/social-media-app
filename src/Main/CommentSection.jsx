@@ -85,10 +85,7 @@ const CommentSection = ({ postId }) => {
         <div className="w-full pr-2">
           <form className="flex items-center w-full" onSubmit={addComment}>
             <input
-              name="comment"
-              type="text"
-              placeholder="Write a comment..."
-              className="w-full rounded-2xl outline-none border-0 p-2 bg-gray-100"
+              name="comment" type="text" placeholder="Write a comment..." className="w-full rounded-2xl outline-none border-0 p-2 bg-gray-100"
               ref={comment}
             ></input>
             <button className="hidden" type="submit">
@@ -97,6 +94,7 @@ const CommentSection = ({ postId }) => {
           </form>
         </div>
       </div>
+      
       {state?.comments?.map((comment, index) => {
         return (
           <Comment
