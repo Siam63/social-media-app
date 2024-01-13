@@ -1,8 +1,6 @@
 import React, { useRef, useContext, useState, useReducer, useEffect } from 'react'
 import { Avatar, Button, Alert } from "@material-tailwind/react";
 import avatar from '../Assets/images/avatar.jpg';
-import live from '../Assets/images/live.png';
-import smile from '../Assets/images/smile.png';
 import addImage from '../Assets/images/add-image.png';
 import { AuthContext } from '../Components/AppContext/AppContext';
 import { doc, setDoc, collection, serverTimestamp, query, orderBy, onSnapshot } from 'firebase/firestore';
@@ -121,7 +119,7 @@ const Main = () => {
       }, [SUBMIT_POST]);
 
     return (
-        <div className="flex flex-col items-center">
+        <div className="mt-10 flex flex-col items-center">
             <div className="flex flex-col py-4 w-full bg-white rounded-3xl shadow-lg">
                 <div className="flex items-center border-b-2 border-gray-300 pb-4 pl-4 w-full">
                     <Avatar className="h-8" size="sm" variant="circular" src={user?.photoURL || avatar} alt="avatar"></Avatar>
@@ -132,14 +130,14 @@ const Main = () => {
                                     type="text" 
                                     name="text"
                                     className="outline-none w-full bg-white rounded-md"
-                                    ref={text}>    
+                                    ref={text}>
                                 </input>
                             </div>
                             <div className="mx-4">
                                 {image && <img className="h-24 rounded-xl" src={image} alt='previewImage'></img>}
                             </div>
                             <div className="mr-4">
-                                <Button variant="text" type="submit">Share</Button>
+                                <Button className="text-md" variant="text" type="submit">Share</Button>
                             </div>
                         </div>
                     </form>
@@ -149,17 +147,10 @@ const Main = () => {
                     <div className="flex items-center">
                         <label htmlFor="addImage" className="cursor-pointer flex items-center">
                             <img className="h-10 mr-4" src={addImage} alt="addImage"></img>
+                            <p className="p-2 hover:bg-gray-200 transition-all font-roboto font-medium text-md text-gray-700 no-underline tracking-normal leading-none">Upload Image</p>
                             <input id="addImage" type="file" style={{ display: "none" }} onChange={handleUpload}></input>
                         </label>
                         {file && <Button variant="text" onClick={submitImage}>Upload</Button>}
-                    </div>
-                    <div className="flex items-center">
-                        <img className="h-10 mr-4" src={live} alt="live"></img>
-                        <p className="font-roboto font-medium text-md text-gray-700 no-underline tracking-normal leading-none">Live</p>
-                    </div>
-                    <div className="flex items-center">
-                        <img className="h-10 mr-4" src={smile} alt="feeling"></img>
-                        <p className="font-roboto font-medium text-md text-gray-700 no-underline tracking-normal leading-none">Feeling</p>
                     </div>
                 </div>
             </div>

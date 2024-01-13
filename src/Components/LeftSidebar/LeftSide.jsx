@@ -29,22 +29,21 @@ const LeftSide = () => {
                     { user?.email || userData?.email }
                 </p>
                 <p className={darkMode ? "font-roboto font-medium text-md text-white no-underline tracking-normal leading-none py-2" : "py-2 font-roboto font-medium text-md text-gray-500 no-underline tracking-normal leading-none"}>
-                    Exclusive tools & insights
-                </p>
-                <p className={darkMode ? "font-roboto font-medium text-md text-white no-underline tracking-normal leading-none py-2" : "py-2 font-roboto font-medium text-md text-gray-500 no-underline tracking-normal leading-none"}>
-                    Try premium for free
+                    PROFILE
                 </p>
             </div>
             <div className="flex flex-col pl-2">
-                <div className="flex items-center pb-4">
-                    <img className="h-8" src={Location} alt="location"></img>
+                <div className="flex justify-center items-center pb-4">
+                    <p className="font-roboto font-bold text-md no-underline tracking-normal leading-none">LOCATION:</p>
+                    <img className="pl-8 h-8" src={Location} alt="location"></img>
                     <p className="font-roboto font-bold text-md no-underline tracking-normal leading-none">
                         Toronto
                     </p>
                 </div>
 
-                <div className="flex items-center pb-4">
-                    <img className="h-8" src={Job} alt="job"></img>
+                <div className="flex justify-center items-center pb-4">
+                <p className="font-roboto font-bold text-md no-underline tracking-normal leading-none">OCCUPATION:</p>
+                    <img className="pl-8 h-8" src={Job} alt="job"></img>
                     <p className="font-roboto font-bold text-md no-underline tracking-normal leading-none">
                         React Developer
                     </p>

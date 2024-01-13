@@ -69,7 +69,7 @@ const RightSide = () => {
                         src={friend?.image || avatar}
                         alt="avatar"
                       ></Avatar>
-                      <p className="ml-4 font-roboto font-medium text-sm text-gray-700 no-underline tracking-normal leading-none">
+                      <p className={darkMode ? "ml-4 font-roboto font-medium text-sm text-white no-underline tracking-normal leading-none": "ml-4 font-roboto font-medium text-sm text-gray-700 no-underline tracking-normal leading-none"}>
                         {friend.name}
                       </p>
                     </div>

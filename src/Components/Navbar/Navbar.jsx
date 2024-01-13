@@ -12,15 +12,15 @@ const Navbar = () => {
             <Link to="/">
                 <div className="flex text-3xl font-extrabold text-gray-900 font-roboto">
                     <span className="text-blue-700 mr-4">
-                        Social Media
+                        SocialSphere
                     </span>
                     <div className={darkMode ? 'text-white' : 'text-black'}>
-                        App
+                        .net
                     </div>
                 </div>
                 <div>
-                    <button onClick={toggleDarkMode}>
-                        Dark Mode
+                    <button className={darkMode ? "hover:bg-blue-500 px-1 rounded-md transition-all" : "hover:bg-blue-200 px-1 rounded-md transition-all"} onClick={toggleDarkMode}>
+                        Toggle Dark Mode
                     </button>
                 </div>
             </Link>
